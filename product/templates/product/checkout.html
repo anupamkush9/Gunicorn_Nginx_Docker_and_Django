@@ -1,0 +1,35 @@
+<html>
+ <head>
+ <title>Buy cool new product</title>
+ <script src="https://js.stripe.com/v3/"></script>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+ </head>
+ <body>
+    <h1>HOST: {{host}}</h1>
+    <p>-----------------------------------------------------------------------------</p>
+    <h1>Buy codasol new product</h1>
+ <div class="container">
+        <div class="row">
+                  {% for product in products %}
+                    <div class="col-sm-4 my-3">
+                      <div class="card shadow" style="width: 22rem;">
+                        <img src="{{product.image.url}}" class="card-img-top rounded" style="height:18rem;" alt="...">
+                        <div class="card-body">
+                              {% if product.title|length >= 30 %}
+                                    <h5 class="card-title">{{product.name|slice:":30"}} ....</h5>
+                                    {% else %}
+                                    <h5 class="card-title">{{product.name}}</h5>
+                                    {% endif %}
+                            <p class="card-title">{{product.description|slice:":30"}} ....</p>
+                            <p class="card-text"><strong>updated at :-</strong>{{product.updated_at}}</p>
+                            <p class="card-text"><strong>Price :-</strong>{{product.price}}</p>
+                          <button type="button" id="checkout-button" data-value="{{ product.id }}" class="btn btn-lg btn-primary">Checkout</button>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+        </div>
+    </div>
+
+ </body>
+</html>
