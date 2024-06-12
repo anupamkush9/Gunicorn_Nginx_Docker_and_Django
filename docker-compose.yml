@@ -12,12 +12,11 @@ services:
       - 1337:80
     # Storage volumes
     volumes:
-      - ./nginx:/home/app/Gunicorn_nginx_Docker_and_Django_Storage/nginx/
-      - static_volume:/home/app/Gunicorn_nginx_Docker_and_Django/static_volume
-      - media_volume:/home/app/Gunicorn_nginx_Docker_and_Django/media_volume
+      - media-data:/media
+      - static-data:/static
     depends_on:
       - web
-    restart: "on-failure"
+    restart: "always"
 
   # Django application
   web:
@@ -25,19 +24,21 @@ services:
     build: .
     container_name: django_web_container
     # Build commands
-    # command: sh -c "python manage.py makemigrations &&
-    #                 python manage.py migrate &&
-    #                 python manage.py collectstatic --no-input &&
-    #                 gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload" 
-    command:  gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py collectstatic --no-input &&
+                    gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload" 
+    # command:  gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload
 
     # Storage volumes
     volumes:
       - .:/home/app/Gunicorn_nginx_Docker_and_Django/
+      - media-data:/media
+      - static-data:/static
     # Exposing port 8000
     expose: 
       - 8000
-    restart: "on-failure"
+    restart: "always"
     depends_on:
       - postgres_db_container
 
@@ -56,7 +57,7 @@ services:
 
 volumes:
   # concept of names volumes
-  static_volume:
-  media_volume:
+  media-data:
+  static-data:
 
 
