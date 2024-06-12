@@ -12,8 +12,8 @@ services:
       - 1337:80
     # Storage volumes
     volumes:
-      - media-data:/media
-      - static-data:/static
+      - media-data:/vol/media
+      - static-data:/vol/static
     depends_on:
       - web
     restart: "always"
@@ -33,8 +33,8 @@ services:
     # Storage volumes
     volumes:
       - .:/home/app/Gunicorn_nginx_Docker_and_Django/
-      - media-data:/media
-      - static-data:/static
+      - media-data:/vol/media
+      - static-data:/vol/static
     # Exposing port 8000
     expose: 
       - 8000
