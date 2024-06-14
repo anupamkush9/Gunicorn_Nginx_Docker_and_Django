@@ -2,7 +2,7 @@
 FROM python:3.9.6-alpine
 
 # Setting up the work directory
-WORKDIR /home/app/Gunicorn_Nginx_Docker_and_Django/
+WORKDIR /src
 
 # Preventing python from writing
 # pyc to docker container
