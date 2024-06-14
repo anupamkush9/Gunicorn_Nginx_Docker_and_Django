@@ -32,9 +32,9 @@ services:
 
     # Storage volumes
     volumes:
-      - .:/home/app/Gunicorn_nginx_Docker_and_Django/
-      - media-data:/media
-      - static-data:/static
+      - .:/src
+      - media-data:/vol/media
+      - static-data:/vol/static
     # Exposing port 8000
     expose: 
       - 8000
