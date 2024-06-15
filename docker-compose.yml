@@ -15,14 +15,64 @@ services:
       - media-data:/media
       - static-data:/static
     depends_on:
-      - web
+      - web1
+      - web2
+      - web3
     restart: "always"
 
   # Django application
-  web:
+  web1:
     # Build context
     build: .
-    container_name: django_web_container
+    container_name: django_web_container1
+    # Build commands
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py collectstatic --no-input &&
+                    gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload" 
+    # command:  gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload
+
+    # Storage volumes
+    volumes:
+      - .:/src
+      - media-data:/vol/media
+      - static-data:/vol/static
+    # Exposing port 8000
+    expose: 
+      - 8000
+    restart: "always"
+    depends_on:
+      - postgres_db_container
+
+  # Django application
+  web2:
+    # Build context
+    build: .
+    container_name: django_web_container2
+    # Build commands
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py collectstatic --no-input &&
+                    gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload" 
+    # command:  gunicorn config.wsgi:application --bind 0.0.0.0:8000  --reload
+
+    # Storage volumes
+    volumes:
+      - .:/src
+      - media-data:/vol/media
+      - static-data:/vol/static
+    # Exposing port 8000
+    expose: 
+      - 8000
+    restart: "always"
+    depends_on:
+      - postgres_db_container
+
+  # Django application
+  web3:
+    # Build context
+    build: .
+    container_name: django_web_container3
     # Build commands
     command: sh -c "python manage.py makemigrations &&
                     python manage.py migrate &&
