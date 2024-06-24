@@ -47,7 +47,9 @@ services:
     image: postgres:12.4
     container_name: postgres_db_container
     env_file: 
+      # where env/.env is the path of my .env file
       - env/.env
+
     ports:
       - "5432:5432"
     volumes:
