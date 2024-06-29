@@ -129,9 +129,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "/vol/static/"
+# STATIC_ROOT = "/vol/static/"  # this line will store the static files on the root directory of linux file system.
+STATIC_ROOT = os.path.join(BASE_DIR, 'vol/static/')  # this line will store the static files on the base directory of project.
 MEDIA_URL = '/media/'
-MEDIA_ROOT = "/vol/media/"
+# MEDIA_ROOT = "/vol/media/" # this line will store the media files on the root directory of linux file system.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'vol/media/') # this will store media files on the base directory of project.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
