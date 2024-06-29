@@ -2,3 +2,5 @@
 **migrations**
 **.pyc**
 /static_volume
+/env/.env
+/vol/*
