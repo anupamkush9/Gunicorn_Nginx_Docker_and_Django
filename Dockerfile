@@ -8,7 +8,7 @@ WORKDIR /src
 # pyc to docker container
 ENV PYTHONDONTWRITEBYTECODE 1
 
-# Flushing out python buffer
+# for setting python output directly to the terminal with out buffering
 ENV PYTHONUNBUFFERED 1
 
 # Updating the os
